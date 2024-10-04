@@ -32,7 +32,7 @@ export default function Header() {
 						to="/create-employee"
 						className={getLinkClass('/create-employee')}
 					>
-						Create Employee
+						Home
 					</Link>
 					<Link to="/employee-list" className={getLinkClass('/employee-list')}>
 						Employee List

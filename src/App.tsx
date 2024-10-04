@@ -14,7 +14,7 @@ function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<div className="min-h-screen bg-gray-100">
+				<div>
 					<Header />
 					<main className="pt-16">
 						<Routes>
