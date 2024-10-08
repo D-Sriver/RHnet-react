@@ -1,9 +1,9 @@
+import { DatePicker } from '@sriver/date-picker-react-v2';
 import React, { useState } from 'react';
 import Button from '../../components/form/Button';
 import Fieldset from '../../components/form/Fieldset';
 import Input from '../../components/form/Input';
 import Select from '../../components/form/Select';
-import { DatePicker } from '../../module/DatePicker';
 import { departments } from '../../utils/departments';
 import { stateOptions } from '../../utils/states';
 
