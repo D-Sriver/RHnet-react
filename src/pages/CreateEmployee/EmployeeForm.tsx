@@ -1,5 +1,5 @@
 import { DatePicker } from '@sriver/date-picker-react-v2';
-import React, { useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import Button from '../../components/form/Button';
 import Fieldset from '../../components/form/Fieldset';
 import Input from '../../components/form/Input';
@@ -7,40 +7,62 @@ import Select from '../../components/form/Select';
 import { departments } from '../../utils/departments';
 import { stateOptions } from '../../utils/states';
 
+const initialFormData = {
+	firstName: '',
+	lastName: '',
+	dateOfBirth: '',
+	startDate: '',
+	street: '',
+	city: '',
+	state: 'AL',
+	zipCode: '',
+	department: 'sales',
+};
+
 const EmployeeForm: React.FC = () => {
-	const [formData, setFormData] = useState({
-		firstName: '',
-		lastName: '',
-		dateOfBirth: '',
-		startDate: '',
-		street: '',
-		city: '',
-		state: 'AL',
-		zipCode: '',
-		department: 'sales',
-	});
+	const [formData, setFormData] = useState(initialFormData);
 
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-	) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
+	const formRef = useRef<HTMLFormElement>(null);
+	const submitIntentional = useRef(false);
 
-	const handleDateChange = (name: string) => (date: Date) => {
-		setFormData((prevData) => ({
-			...prevData,
-			[name]: date.toISOString().split('T')[0],
-		}));
-	};
+	const handleChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+			const { name, value } = e.target;
+			setFormData((prevData) => ({ ...prevData, [name]: value }));
+		},
+		[]
+	);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log(formData);
-	};
+	const handleDateChange = useCallback(
+		(name: string) => (date: Date) => {
+			setFormData((prevData) => ({
+				...prevData,
+				[name]: date.toISOString().split('T')[0],
+			}));
+		},
+		[]
+	);
+
+	const handleSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
+			if (submitIntentional.current) {
+				console.log(formData);
+				// Logique pour sauvegarder l'employé
+				submitIntentional.current = false;
+			}
+		},
+		[formData]
+	);
+
+	const handleSaveClick = useCallback(() => {
+		submitIntentional.current = true;
+		formRef.current?.requestSubmit();
+	}, []);
 
 	return (
 		<form
+			ref={formRef}
 			onSubmit={handleSubmit}
 			className="mx-auto max-w-4xl space-y-6 rounded-xl bg-white/40 p-8 shadow-lg backdrop-blur-md"
 		>
@@ -133,7 +155,9 @@ const EmployeeForm: React.FC = () => {
 			</Fieldset>
 
 			<div className="flex justify-center">
-				<Button type="submit">Save</Button>
+				<Button type="button" onClick={handleSaveClick}>
+					Save
+				</Button>
 			</div>
 		</form>
 	);
