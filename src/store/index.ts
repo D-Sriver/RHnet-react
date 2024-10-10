@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import employeeReducer from './employeeSlice';
 import navigationReducer from './navigationSlice';
 
 export const store = configureStore({
 	reducer: {
 		navigation: navigationReducer,
+		employees: employeeReducer,
 	},
 });
 
