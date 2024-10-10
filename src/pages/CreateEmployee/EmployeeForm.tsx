@@ -1,9 +1,12 @@
 import { DatePicker } from '@sriver/date-picker-react-v2';
 import React, { useCallback, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/form/Button';
 import Fieldset from '../../components/form/Fieldset';
 import Input from '../../components/form/Input';
 import Select from '../../components/form/Select';
+import Modal from '../../components/Modal';
+import { addEmployee } from '../../store/employeeSlice';
 import { departments } from '../../utils/departments';
 import { stateOptions } from '../../utils/states';
 
@@ -20,7 +23,9 @@ const initialFormData = {
 };
 
 const EmployeeForm: React.FC = () => {
+	const dispatch = useDispatch();
 	const [formData, setFormData] = useState(initialFormData);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const formRef = useRef<HTMLFormElement>(null);
 	const submitIntentional = useRef(false);
@@ -48,11 +53,13 @@ const EmployeeForm: React.FC = () => {
 			e.preventDefault();
 			if (submitIntentional.current) {
 				console.log(formData);
-				// Logique pour sauvegarder l'employé
+				dispatch(addEmployee(formData));
+				setIsModalOpen(true);
+				setFormData(initialFormData);
 				submitIntentional.current = false;
 			}
 		},
-		[formData]
+		[formData, dispatch]
 	);
 
 	const handleSaveClick = useCallback(() => {
@@ -60,114 +67,123 @@ const EmployeeForm: React.FC = () => {
 		formRef.current?.requestSubmit();
 	}, []);
 
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
-		<form
-			ref={formRef}
-			onSubmit={handleSubmit}
-			className="mx-auto max-w-4xl space-y-6 rounded-xl bg-white/40 p-8 shadow-lg backdrop-blur-md"
-		>
-			<Fieldset legend="Personal Information">
-				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-					<Input
-						label="First Name"
-						type="text"
-						name="firstName"
-						value={formData.firstName}
-						onChange={handleChange}
-					/>
-					<Input
-						label="Last Name"
-						type="text"
-						name="lastName"
-						value={formData.lastName}
-						onChange={handleChange}
-					/>
-					<div className="relative z-20">
-						<label className="mb-1 block font-medium text-gray-700">
-							Date of Birth
-						</label>
-						<DatePicker
-							name="dateOfBirth"
-							locale="en-US" // Locale
-							colorPrimary="#4caf50"
-							colorSecondary="#ffffff"
-							colorTertiary="#333333"
-							onChange={handleDateChange('dateOfBirth')}
-							initialDate={
-								formData.dateOfBirth
-									? new Date(formData.dateOfBirth)
-									: undefined
-							}
+		<>
+			<form
+				ref={formRef}
+				onSubmit={handleSubmit}
+				className="mx-auto max-w-4xl space-y-6 rounded-xl bg-white/40 p-8 shadow-lg backdrop-blur-md"
+			>
+				<Fieldset legend="Personal Information">
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<Input
+							label="First Name"
+							type="text"
+							name="firstName"
+							value={formData.firstName}
+							onChange={handleChange}
 						/>
-					</div>
-					<div className="relative z-10">
-						<label className="mb-1 block font-medium text-gray-700">
-							Start Date
-						</label>
-						<DatePicker
-							name="startDate"
-							colorPrimary="#4caf50"
-							colorSecondary="#ffffff"
-							colorTertiary="#333333"
-							locale="fr-FR"
-							onChange={handleDateChange('startDate')}
-							initialDate={
-								formData.startDate ? new Date(formData.startDate) : undefined
-							}
+						<Input
+							label="Last Name"
+							type="text"
+							name="lastName"
+							value={formData.lastName}
+							onChange={handleChange}
 						/>
+						<div className="relative z-20">
+							<label className="mb-1 block font-medium text-white/70">
+								Date of Birth
+							</label>
+							<DatePicker
+								name="dateOfBirth"
+								locale="en-US" // Locale
+								colorPrimary="#4caf50"
+								colorSecondary="#ffffff"
+								colorTertiary="#333333"
+								onChange={handleDateChange('dateOfBirth')}
+								initialDate={
+									formData.dateOfBirth
+										? new Date(formData.dateOfBirth)
+										: undefined
+								}
+							/>
+						</div>
+						<div className="relative z-10">
+							<label className="mb-1 block font-medium text-white/70">
+								Start Date
+							</label>
+							<DatePicker
+								name="startDate"
+								colorPrimary="#4caf50"
+								colorSecondary="#ffffff"
+								colorTertiary="#333333"
+								locale="fr-FR"
+								onChange={handleDateChange('startDate')}
+								initialDate={
+									formData.startDate ? new Date(formData.startDate) : undefined
+								}
+							/>
+						</div>
 					</div>
-				</div>
-			</Fieldset>
+				</Fieldset>
 
-			<Fieldset legend="Address">
-				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-					<Input
-						label="Street"
-						type="text"
-						name="street"
-						value={formData.street}
-						onChange={handleChange}
-					/>
-					<Input
-						label="City"
-						type="text"
-						name="city"
-						value={formData.city}
-						onChange={handleChange}
-					/>
+				<Fieldset legend="Address">
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<Input
+							label="Street"
+							type="text"
+							name="street"
+							value={formData.street}
+							onChange={handleChange}
+						/>
+						<Input
+							label="City"
+							type="text"
+							name="city"
+							value={formData.city}
+							onChange={handleChange}
+						/>
+						<Select
+							label="State"
+							name="state"
+							value={formData.state}
+							onChange={handleChange}
+							options={stateOptions}
+						/>
+						<Input
+							label="Zip Code"
+							type="text"
+							name="zipCode"
+							value={formData.zipCode}
+							onChange={handleChange}
+						/>
+					</div>
+				</Fieldset>
+
+				<Fieldset legend="Department">
 					<Select
-						label="State"
-						name="state"
-						value={formData.state}
+						label="Department"
+						name="department"
+						value={formData.department}
 						onChange={handleChange}
-						options={stateOptions}
+						options={departments}
 					/>
-					<Input
-						label="Zip Code"
-						type="text"
-						name="zipCode"
-						value={formData.zipCode}
-						onChange={handleChange}
-					/>
+				</Fieldset>
+
+				<div className="flex justify-center">
+					<Button type="button" onClick={handleSaveClick}>
+						Save
+					</Button>
 				</div>
-			</Fieldset>
-
-			<Fieldset legend="Department">
-				<Select
-					label="Department"
-					name="department"
-					value={formData.department}
-					onChange={handleChange}
-					options={departments}
-				/>
-			</Fieldset>
-
-			<div className="flex justify-center">
-				<Button type="button" onClick={handleSaveClick}>
-					Save
-				</Button>
-			</div>
-		</form>
+			</form>
+			<Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+				<p>L'employé a été créé avec succès !</p>
+			</Modal>
+		</>
 	);
 };
 

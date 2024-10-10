@@ -22,7 +22,7 @@ const Select: React.FC<SelectProps> = ({
 
 	return (
 		<div className="flex flex-col">
-			<label htmlFor={selectId} className="mb-1 font-medium text-gray-700">
+			<label htmlFor={selectId} className="mb-1 font-medium text-white/70">
 				{label}
 			</label>
 			<select

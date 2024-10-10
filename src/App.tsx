@@ -14,7 +14,7 @@ function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<div>
+				<div className="min-h-screen bg-gradient-to-br from-lime-800 via-black/90 to-lime-900">
 					<Header />
 					<main className="pt-16">
 						<Routes>
