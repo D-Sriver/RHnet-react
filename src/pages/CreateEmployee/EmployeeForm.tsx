@@ -1,5 +1,5 @@
 import { DatePicker } from '@sriver/date-picker-react-v2';
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Button from '../../components/form/Button';
 import Fieldset from '../../components/form/Fieldset';
 import Input from '../../components/form/Input';
@@ -82,12 +82,16 @@ const EmployeeForm: React.FC = () => {
 						value={formData.lastName}
 						onChange={handleChange}
 					/>
-					<div className="relative z-10">
+					<div className="relative z-20">
 						<label className="mb-1 block font-medium text-gray-700">
 							Date of Birth
 						</label>
 						<DatePicker
 							name="dateOfBirth"
+							locale="en-US" // Locale
+							colorPrimary="#4caf50"
+							colorSecondary="#ffffff"
+							colorTertiary="#333333"
 							onChange={handleDateChange('dateOfBirth')}
 							initialDate={
 								formData.dateOfBirth
@@ -102,6 +106,10 @@ const EmployeeForm: React.FC = () => {
 						</label>
 						<DatePicker
 							name="startDate"
+							colorPrimary="#4caf50"
+							colorSecondary="#ffffff"
+							colorTertiary="#333333"
+							locale="fr-FR"
 							onChange={handleDateChange('startDate')}
 							initialDate={
 								formData.startDate ? new Date(formData.startDate) : undefined
