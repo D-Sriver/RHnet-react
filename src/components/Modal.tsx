@@ -1,10 +1,5 @@
 import React from 'react';
-
-interface ModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	children: React.ReactNode;
-}
+import { ModalProps } from '../types/FormTypes';
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 	if (!isOpen) return null;
@@ -27,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 					<div className="relative flex-auto p-6">{children}</div>
 					<div className="flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6">
 						<button
-							className="background-transparent mb-1 mr-1 px-6 py-2 text-sm font-bold uppercase text-lime-500 outline-none transition-all duration-150 ease-linear focus:outline-none"
+							className="mb-1 mr-1 bg-transparent px-6 py-2 text-sm font-bold uppercase text-lime-500 outline-none transition-all duration-150 ease-linear focus:outline-none"
 							type="button"
 							onClick={onClose}
 						>

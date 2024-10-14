@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setEmployees } from '../../store/employeeSlice';
+import { Employee } from '../../types/Employee_type';
 import EmployeeTable from './EmployeeTable';
 
 export default function EmployeeList() {
@@ -50,7 +51,7 @@ export default function EmployeeList() {
 			<h1 className="mb-4 text-center text-3xl font-bold text-white">
 				Current Employees
 			</h1>
-			<div className="rounded-xl bg-white/40 p-8 shadow-lg backdrop-blur-md">
+			<div className="mb-6 rounded-lg border border-gray-300/50 bg-white/20 p-4 shadow-md backdrop-blur-md">
 				<div className="mb-4 flex items-center justify-between">
 					<div className="flex items-center">
 						<span className="mr-2 text-white">Show</span>
@@ -78,7 +79,7 @@ export default function EmployeeList() {
 				</div>
 				{filteredEmployees.length > 0 ? (
 					<>
-						<EmployeeTable employees={currentEmployees} />
+						<EmployeeTable employees={currentEmployees as Employee[]} />
 						<div className="mt-4 flex items-center justify-between">
 							<span className="text-white">
 								Showing {indexOfFirstEmployee + 1} to{' '}

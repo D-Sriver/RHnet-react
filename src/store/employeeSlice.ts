@@ -1,32 +1,60 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Employee } from '../types/Employee_type';
+import { Employee } from '../types/EmployeeTableProps_type';
+import { EmployeeFormData } from '../types/FormTypes';
+import { SortKey } from '../types/SortKey';
+import { initialFormData } from '../utils/initialFormData';
 
 interface EmployeeState {
 	employees: Employee[];
+	sortConfig: {
+		key: SortKey | null;
+		direction: 'ascending' | 'descending';
+	};
+	formData: EmployeeFormData;
 }
 
-const loadEmployeesFromLocalStorage = (): Employee[] => {
-	const storedEmployees = localStorage.getItem('employees');
-	return storedEmployees ? JSON.parse(storedEmployees) : [];
-};
-
 const initialState: EmployeeState = {
-	employees: loadEmployeesFromLocalStorage(),
+	employees: [],
+	sortConfig: {
+		key: null,
+		direction: 'ascending',
+	},
+	formData: initialFormData,
 };
 
 const employeeSlice = createSlice({
 	name: 'employees',
 	initialState,
 	reducers: {
-		addEmployee: (state, action: PayloadAction<Employee>) => {
-			state.employees.push(action.payload);
-			localStorage.setItem('employees', JSON.stringify(state.employees));
-		},
 		setEmployees: (state, action: PayloadAction<Employee[]>) => {
 			state.employees = action.payload;
+		},
+		setSortConfig: (
+			state,
+			action: PayloadAction<EmployeeState['sortConfig']>
+		) => {
+			state.sortConfig = action.payload;
+		},
+		updateFormData: (
+			state,
+			action: PayloadAction<Partial<EmployeeFormData>>
+		) => {
+			state.formData = { ...state.formData, ...action.payload };
+		},
+		resetFormData: (state) => {
+			state.formData = initialFormData;
+		},
+		addEmployee: (state, action: PayloadAction<Employee>) => {
+			state.employees.push(action.payload);
 		},
 	},
 });
 
-export const { addEmployee, setEmployees } = employeeSlice.actions;
+export const {
+	setEmployees,
+	setSortConfig,
+	updateFormData,
+	resetFormData,
+	addEmployee,
+} = employeeSlice.actions;
 export default employeeSlice.reducer;

@@ -1,4 +1,5 @@
 import { DatePicker } from '@sriver/date-picker-react-v2';
+
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/form/Button';
@@ -7,20 +8,15 @@ import Input from '../../components/form/Input';
 import Select from '../../components/form/Select';
 import Modal from '../../components/Modal';
 import { addEmployee } from '../../store/employeeSlice';
+import { PropsPicker } from '../../utils/datepickerProps';
 import { departments } from '../../utils/departments';
+import {
+	addressFields,
+	dateFields,
+	personalInfoFields,
+} from '../../utils/formFields';
+import { initialFormData } from '../../utils/initialFormData';
 import { stateOptions } from '../../utils/states';
-
-const initialFormData = {
-	firstName: '',
-	lastName: '',
-	dateOfBirth: '',
-	startDate: '',
-	street: '',
-	city: '',
-	state: 'AL',
-	zipCode: '',
-	department: 'sales',
-};
 
 const EmployeeForm: React.FC = () => {
 	const dispatch = useDispatch();
@@ -76,90 +72,62 @@ const EmployeeForm: React.FC = () => {
 			<form
 				ref={formRef}
 				onSubmit={handleSubmit}
-				className="mx-auto max-w-4xl space-y-6 rounded-xl bg-white/40 p-8 shadow-lg backdrop-blur-md"
+				className="mx-auto max-w-4xl space-y-6 rounded-xl bg-transparent p-8 shadow-lg backdrop-blur-md"
 			>
 				<Fieldset legend="Personal Information">
 					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-						<Input
-							label="First Name"
-							type="text"
-							name="firstName"
-							value={formData.firstName}
-							onChange={handleChange}
-						/>
-						<Input
-							label="Last Name"
-							type="text"
-							name="lastName"
-							value={formData.lastName}
-							onChange={handleChange}
-						/>
-						<div className="relative z-20">
-							<label className="mb-1 block font-medium text-white/70">
-								Date of Birth
-							</label>
-							<DatePicker
-								name="dateOfBirth"
-								locale="en-US" // Locale
-								colorPrimary="#4caf50"
-								colorSecondary="#ffffff"
-								colorTertiary="#333333"
-								onChange={handleDateChange('dateOfBirth')}
-								initialDate={
-									formData.dateOfBirth
-										? new Date(formData.dateOfBirth)
-										: undefined
-								}
+						{personalInfoFields.map((field) => (
+							<Input
+								key={field.name}
+								label={field.label}
+								type={field.type}
+								name={field.name}
+								value={formData[field.name as keyof typeof formData]}
+								onChange={handleChange}
 							/>
-						</div>
-						<div className="relative z-10">
-							<label className="mb-1 block font-medium text-white/70">
-								Start Date
-							</label>
-							<DatePicker
-								name="startDate"
-								colorPrimary="#4caf50"
-								colorSecondary="#ffffff"
-								colorTertiary="#333333"
-								locale="fr-FR"
-								onChange={handleDateChange('startDate')}
-								initialDate={
-									formData.startDate ? new Date(formData.startDate) : undefined
-								}
-							/>
-						</div>
+						))}
+						{dateFields.map((field) => (
+							<div key={field.name} className="relative z-20">
+								<label className="mb-1 block font-medium text-white/70">
+									{field.label}
+								</label>
+								<DatePicker
+									name={field.name}
+									{...PropsPicker}
+									onChange={handleDateChange(field.name)}
+									initialDate={
+										formData[field.name as keyof typeof formData]
+											? new Date(
+													formData[
+														field.name as keyof typeof formData
+													] as string
+												)
+											: undefined
+									}
+								/>
+							</div>
+						))}
 					</div>
 				</Fieldset>
 
 				<Fieldset legend="Address">
 					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-						<Input
-							label="Street"
-							type="text"
-							name="street"
-							value={formData.street}
-							onChange={handleChange}
-						/>
-						<Input
-							label="City"
-							type="text"
-							name="city"
-							value={formData.city}
-							onChange={handleChange}
-						/>
+						{addressFields.map((field) => (
+							<Input
+								key={field.name}
+								label={field.label}
+								type={field.type}
+								name={field.name}
+								value={formData[field.name as keyof typeof formData]}
+								onChange={handleChange}
+							/>
+						))}
 						<Select
 							label="State"
 							name="state"
 							value={formData.state}
 							onChange={handleChange}
 							options={stateOptions}
-						/>
-						<Input
-							label="Zip Code"
-							type="text"
-							name="zipCode"
-							value={formData.zipCode}
-							onChange={handleChange}
 						/>
 					</div>
 				</Fieldset>

@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface FieldsetProps {
-	legend: string;
-	children: React.ReactNode;
-}
+import { FieldsetProps } from '../../types/FormTypes';
 
 const Fieldset: React.FC<FieldsetProps> = ({ children }) => {
 	return (
