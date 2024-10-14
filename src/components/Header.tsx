@@ -21,7 +21,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className="fixed inset-x-0 top-0 h-16 bg-white/20 p-4 shadow-md backdrop-blur-lg">
+		<header className="fixed inset-x-0 top-0 z-50 h-16 bg-white/20 p-4 shadow-md backdrop-blur-lg">
 			<div className="flex items-center justify-between text-xl md:text-lg">
 				<div className="flex items-center">
 					<img src={LogoRhnet} alt="RHnet Logo" className="mr-2 size-10" />

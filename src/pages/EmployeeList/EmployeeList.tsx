@@ -52,7 +52,7 @@ export default function EmployeeList() {
 				Current Employees
 			</h1>
 			<div className="mb-6 rounded-lg border border-gray-300/50 bg-white/20 p-4 shadow-md backdrop-blur-md">
-				<div className="mb-4 flex items-center justify-between">
+				<div className="mb-4 flex flex-wrap items-center justify-between gap-x-0 gap-y-4">
 					<div className="flex items-center">
 						<span className="mr-2 text-white">Show</span>
 						<select
