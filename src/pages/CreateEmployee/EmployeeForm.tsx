@@ -72,7 +72,7 @@ const EmployeeForm: React.FC = () => {
 			<form
 				ref={formRef}
 				onSubmit={handleSubmit}
-				className="mx-auto max-w-4xl space-y-6 rounded-xl bg-transparent p-8 shadow-lg backdrop-blur-md"
+				className="mx-auto flex max-w-4xl flex-col gap-6"
 			>
 				<Fieldset legend="Personal Information">
 					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -49,7 +49,7 @@ export default function EmployeeTable({ employees }: EmployeeTableProps) {
 							{headers.map(({ key, label }) => (
 								<th
 									key={key}
-									className="min-w-[100px] border-b-2 border-white/40 px-4 py-2 text-left font-semibold text-white"
+									className="max-w-[100px] border-b-2 border-white/40 px-4 py-2 text-left font-semibold text-white"
 								>
 									<button
 										className="flex w-full items-center justify-between"

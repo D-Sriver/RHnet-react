@@ -54,8 +54,11 @@ export default function EmployeeList() {
 			<div className="mb-6 rounded-lg border border-gray-300/50 bg-white/20 p-4 shadow-md backdrop-blur-md">
 				<div className="mb-4 flex flex-wrap items-center justify-between gap-x-0 gap-y-4">
 					<div className="flex items-center">
-						<span className="mr-2 text-white">Show</span>
+						<label htmlFor="entriesPerPage" className="mr-2 text-white">
+							Afficher
+						</label>
 						<select
+							id="entriesPerPage"
 							value={entriesPerPage}
 							onChange={handleEntriesChange}
 							className="rounded border border-gray-300/50 bg-white/20 px-2 py-1 text-white focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500 focus:ring-offset-lime-500"
@@ -65,7 +68,7 @@ export default function EmployeeList() {
 							<option value={50}>50</option>
 							<option value={100}>100</option>
 						</select>
-						<span className="ml-2 text-white">entries</span>
+						<span className="ml-2 text-white">entrées</span>
 					</div>
 					<div className="flex items-center">
 						<input
