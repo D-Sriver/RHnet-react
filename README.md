@@ -10,12 +10,13 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.13-blue)](https://tailwindcss.com/)
 [![Date-picker](https://img.shields.io/badge/@sriver/date--picker--react--v2-1.0.10-purple)](https://github.com/sriver/date-picker-react-v2)
 
-
-
 # HRnet - Application de gestion des employés
 Ce projet est une application de gestion des employés pour WealthHealth. 
 
 L'objectif principal était de mettre à jour HRnet depuis un projet JQuery et le convertir en React.
+
+![Capture d'écran de HRnet](/public/rhnetimg.png)
+
 
 ## Sommaire
 
@@ -29,9 +30,6 @@ L'objectif principal était de mettre à jour HRnet depuis un projet JQuery et l
 8. [Auteur](#auteur)
 9. [Licence](#licence)
 
-![Capture d'écran de HRnet](/public/rhnetimg.png)
-
-
 ## Fonctionnalités principales
 
 - ✅ Conversion complète du projet en React
@@ -43,7 +41,6 @@ L'objectif principal était de mettre à jour HRnet depuis un projet JQuery et l
 
 - Vercel : [Lien](https://r-hnet-react-1otu47sr8-dsrivers-projects.vercel.app)
 
-
 ## Rapport de performance
 
 - audit au format Json de Lighthouse pour la page de création d'employés: [Lien](./public/localhost-index-v2.json)
@@ -51,14 +48,13 @@ L'objectif principal était de mettre à jour HRnet depuis un projet JQuery et l
 
 ### Rapport de performance V1 (Jquery)
 
-![Image de V1 index](https://github.com/D-Sriver/RHnet-react/public/pageV1-index.png)
-![Image de V1 list](https://github.com/D-Sriver/RHnet-react/public/pageV1-list.png)
+![Image de V1 index](public/pageV1-index.png) 
+![Image de V1 list](public/pageV1-list.png)
 
 ### Rapport de performance V2 (React)
 
-
-![Image de V2 index](https://github.com/D-Sriver/RHnet-react/public/pageV2-index.png)
-![Image de V2 list](https://github.com/D-Sriver/RHnet-react/public/pageV2-list.png)
+![Image de V2 index](public/pageV2-index.png)
+![Image de V2 list](public/pageV2-list.png)
 
 ## Prérequis
 
