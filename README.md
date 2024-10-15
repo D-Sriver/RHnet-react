@@ -1,50 +1,95 @@
-# React + TypeScript + Vite
+[![Node.js](https://img.shields.io/badge/Node.js-20.11.1-green)](https://nodejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4.1-yellow)](https://vitejs.dev/)
+[![Bun](https://img.shields.io/badge/Bun-1.1.13-red)](https://bun.sh/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-blue)](https://www.typescriptlang.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-9.11.1-red)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-3.3.3-blue)](https://prettier.io/)
+[![React](https://img.shields.io/badge/React-18.3.1-blueviolet)](https://reactjs.org/)
+[![React Router](https://img.shields.io/badge/React_Router-6.26.2-orange)](https://reactrouter.com/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.2.7-purple)](https://redux-toolkit.js.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.13-blue)](https://tailwindcss.com/)
+[![Date-picker](https://img.shields.io/badge/@sriver/date--picker--react--v2-1.0.10-purple)](https://github.com/sriver/date-picker-react-v2)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# HRnet - Application de gestion des employés
+Ce projet est une application de gestion des employés pour WealthHealth. 
 
-## Expanding the ESLint configuration
+L'objectif principal était de mettre à jour HRnet depuis un projet JQuery et le convertir en React.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Sommaire
 
-- Configure the top-level `parserOptions` property like this:
+1. [Fonctionnalités principales](#fonctionnalités-principales)
+2. [Démo](#démo)
+3. [Rapport de performance](#rapport-de-performance)
+4. [Prérequis](#prérequis)
+5. [Installation](#installation)
+6. [Utilisation](#utilisation)
+7. [Exemple du date picker](#exemple-du-date-picker)
+8. [Auteur](#auteur)
+9. [Licence](#licence)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+![Capture d'écran de HRnet](/public/rhnetimg.png)
+
+
+## Fonctionnalités principales
+
+- ✅ Conversion complète du projet en React
+- ✅ Ajout d'un système de gestion d'état avec Redux Toolkit
+- ✅ Création d'un plugin React pour le sélecteur de date 
+- ✅ Interface utilisateur responsive avec Tailwind CSS
+
+## Démo
+
+- Vercel : [Lien](https://r-hnet-react-1otu47sr8-dsrivers-projects.vercel.app)
+
+
+## Rapport de performance
+
+- audit au format Json de Lighthouse pour la page de création d'employés: [Lien](./public/localhost-index-v2.json)
+- audit au format Json de Lighthouse pour la page de tableau d'employés: [Lien](./public/localhost-list-v2.json)
+
+### Rapport de performance V1 (Jquery)
+
+![Image de V1 index](https://github.com/D-Sriver/RHnet-react/public/pageV1-index.png)
+![Image de V1 list](https://github.com/D-Sriver/RHnet-react/public/pageV1-list.png)
+
+### Rapport de performance V2 (React)
+
+
+![Image de V2 index](https://github.com/D-Sriver/RHnet-react/public/pageV2-index.png)
+![Image de V2 list](https://github.com/D-Sriver/RHnet-react/public/pageV2-list.png)
+
+## Prérequis
+
+Pour obtenir et construire le projet, vous aurez besoin d'installer :
+
+- NodeJS
+- Git
+- Un terminal pour exécuter les commandes.
+
+## Installation
+
+```sh
+git clone https://github.com/D-Sriver/RHnet-react.git
+cd RHnet-react
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Utilisation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```sh
+npm run dev
 ```
+
+## Exemple du date picker
+
+![Exemple du date picker](https://github.com/D-Sriver/Date-Picker-React/raw/main/datepikerv2.gif)
+
+## Auteur
+
+[D-Sriver](https://github.com/D-Sriver)
+
+## Licence
+
+[MIT](https://github.com/D-Sriver/RHnet-react/blob/main/LICENSE)
