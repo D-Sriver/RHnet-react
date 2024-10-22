@@ -6,6 +6,7 @@ import {
 	Routes,
 } from 'react-router-dom';
 import Header from './components/Header';
+import NotFound from './components/NotFound';
 import CreateEmployee from './pages/CreateEmployee/CreateEmployee';
 import EmployeeList from './pages/EmployeeList/EmployeeList';
 import { store } from './store';
@@ -24,6 +25,7 @@ function App() {
 							/>
 							<Route path="/create-employee" element={<CreateEmployee />} />
 							<Route path="/employee-list" element={<EmployeeList />} />
+							<Route path="*" element={<NotFound />} />
 						</Routes>
 					</main>
 				</div>
